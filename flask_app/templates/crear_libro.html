@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Nuevo Libro</title>
+</head>
+<body>
+    
+    <h2>Nuevo Libro</h2>
+    
+    <!-- Enlaces de navegación superiores -->
+    <a href="/dashboard">Inicio</a> | 
+    <a href="/cerrar_sesion">Cerrar Sesión</a>
+    
+    <hr>
+
+    <!-- Mensajes de error (Flash) -->
+    {% with messages = get_flashed_messages(category_filter=['crear_libro']) %}
+        {% if messages %}
+            <div class="alert">
+                {% for mensaje in messages %}
+                    <p>{{ mensaje }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/crear_libro" method="post">
+        <br>
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <br><br>
+        <label for="autor">Autor:</label><br>
+        <textarea id="autor" name="autor" maxlength="40"></textarea>
+
+
+        <br><br>
+        <label for="sinopsis">Sinopsis:</label><br>
+        <textarea id="sinopsis" name="sinopsis" rows="4" cols="40"></textarea>
+
+        <br><br>
+        <input type="submit" value="Guardar">
+    </form>
+
+</body>
+</html>

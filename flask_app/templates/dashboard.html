@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompartiLibros - Dashboard</title>
+</head>
+<body>
+    <h1>Bienvenid@ {{ usuario.nombre }}</h1>
+
+    <a href="/crear_libro">Crear Libro</a> |
+    <a href="/cerrar_sesion">Cerrar Sesión</a>
+
+    <hr>
+
+    <h3>Lista de libros</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Sinopsis</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.sinopsis }}</td>
+                <td>
+                    <a href="/ver/{{ libro.id }}">Ver</a>
+                    {% if libro.usuario_id == session['usuario_id'] %}
+                        | <a href="/editar/{{ libro.id }}">Editar</a>
+                        | <a href="/borrar/{{ libro.id }}">Borrar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
